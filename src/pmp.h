@@ -48,8 +48,14 @@ enum pmp_priority {
                 "sfence.vma\n\t"\
                 ".align 2\n\t" \
                 "1: csrw mtvec, t0 \n\t" \
-                : : "r" (addr), "r" (pmpc) : "t0"); \
-}
+                : : "r" (addr), "r" (pmpc) : "t0");                        \
+      /* Set IO-PMP */ \
+      iopmpcfg_t p; \
+      p.cfg = pmpc; \
+      p.a0 = addr; \
+      p.slot = n; \
+      set_iopmp(p); \
+      }
 
 #define PMP_UNSET(n, g) \
 { uintptr_t pmpc = csr_read(pmpcfg##g); \
@@ -61,7 +67,13 @@ enum pmp_priority {
                 "sfence.vma\n\t"\
                 ".align 2\n\t" \
                 "1: csrw mtvec, t0" \
-                : : "r" (0), "r" (pmpc) : "t0"); \
+                : : "r" (0), "r" (pmpc) : "t0");                \
+      /* Set IO-PMP */ \
+      iopmpcfg_t p; \
+      p.cfg = pmpc; \
+      p.a0 = 0; \
+      p.slot = n; \
+      set_iopmp(p);     \
 }
 
 #define PMP_ERROR(error, msg) {\

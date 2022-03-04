@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------------
 #include "assert.h"
 #include "pmp.h"
+#include "iopmp.h"
 #include "cpu.h"
 #include "safe_math_util.h"
 #include "sm-sbi-opensbi.h"
@@ -216,6 +217,9 @@ int pmp_set_global(int region_idx, uint8_t perm)
 
 void pmp_init()
 {
+    /* initialize IO-PMP on CVA6 platform */
+    init_iopmp();
+
   uintptr_t pmpaddr = 0;
   uintptr_t pmpcfg = 0;
   int i;
@@ -241,10 +245,10 @@ int pmp_set_keystone(int region_idx, uint8_t perm)
 
   pmpaddr = region_pmpaddr_val(region_idx);
 
-  //sbi_printf("pmp_set() [hart %d]: reg[%d], mode[%s], range[0x%lx-0x%lx], perm[0x%x]\r\n",
-  //       current_hartid(), reg_idx, (region_is_tor(region_idx) ? "TOR":"NAPOT"),
-  //       region_get_addr(region_idx), region_get_addr(region_idx) + region_get_size(region_idx), perm);
-  //sbi_printf("  pmp[%d] = pmpaddr: 0x%lx, pmpcfg: 0x%lx\r\n", reg_idx, pmpaddr, pmpcfg);
+//  sbi_printf("iopmp()/pmp_set() [hart %d]: reg[%d], mode[%s], range[0x%lx-0x%lx], perm[0x%x]\r\n",
+//         current_hartid(), reg_idx, (region_is_tor(region_idx) ? "TOR":"NAPOT"),
+//         region_get_addr(region_idx), region_get_addr(region_idx) + region_get_size(region_idx), perm);
+//  sbi_printf(" iopmp[%d]/pmp[%d] = pmpaddr: 0x%lx, pmpcfg: 0x%lx\r\n", reg_idx, reg_idx, pmpaddr, pmpcfg);
 
   int n=reg_idx;
 

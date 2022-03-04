@@ -14,6 +14,7 @@ platform-objs-y += $(KEYSTONE_SM_REL)src/attest.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/cpu.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/crypto.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/enclave.o
+platform-objs-y += $(KEYSTONE_SM_REL)src/iopmp.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/pmp.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/sm.o
 platform-objs-y += $(KEYSTONE_SM_REL)src/sm-sbi.o

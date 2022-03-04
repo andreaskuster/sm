@@ -9,6 +9,7 @@ platform-objs-y += ../../src/attest.o
 platform-objs-y += ../../src/cpu.o
 platform-objs-y += ../../src/crypto.o
 platform-objs-y += ../../src/enclave.o
+platform-objs-y += ../../src/iopmp.o
 platform-objs-y += ../../src/pmp.o
 platform-objs-y += ../../src/sm.o
 platform-objs-y += ../../src/sm-sbi.o
